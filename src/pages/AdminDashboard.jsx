@@ -19,7 +19,7 @@ function AdminDashboard() {
       .order('created_at', { ascending: true });
 
     if (error) {
-      console.error('Error fetching reports:', error);
+      console.error('Error fetching pending reports:', error);
     } else {
       setReports(data || []);
     }
