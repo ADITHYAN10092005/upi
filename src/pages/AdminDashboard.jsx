@@ -19,7 +19,7 @@ function AdminDashboard() {
       .order('created_at', { ascending: true });
 
     if (error) {
-      console.error('Error fetching pending reports:', error);
+      console.error('Error fetching reports:', error);
     } else {
       setReports(data || []);
     }
@@ -28,7 +28,7 @@ function AdminDashboard() {
 
   const handleAction = async (reportId, action) => {
     const status = action === 'approve' ? 'approved' : 'rejected';
-    
+
     // Update report status
     const { error } = await supabase
       .from('reports')
@@ -51,7 +51,7 @@ function AdminDashboard() {
         <ShieldCheck size={28} style={{ color: 'var(--safe)' }} />
         <h2 style={{ fontSize: '1.4rem' }}>Moderation Dashboard</h2>
       </div>
-      
+
       <p style={{ marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
         Pending reports: {reports.length}
       </p>
@@ -65,7 +65,7 @@ function AdminDashboard() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           {reports.map(report => (
             <div key={report.id} style={{ background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-glass)' }}>
-              
+
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                 <div>
                   <h3 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>{report.upi_ids?.upi_id}</h3>
@@ -92,15 +92,15 @@ function AdminDashboard() {
               )}
 
               <div style={{ display: 'flex', gap: '1rem' }}>
-                <button 
-                  className="btn" 
+                <button
+                  className="btn"
                   style={{ flex: 1, backgroundColor: 'var(--safe)', color: 'white' }}
                   onClick={() => handleAction(report.id, 'approve')}
                 >
                   <Check size={18} /> Approve (Affects Score)
                 </button>
-                <button 
-                  className="btn" 
+                <button
+                  className="btn"
                   style={{ flex: 1, backgroundColor: 'var(--bg-primary)', border: '1px solid var(--danger)', color: 'var(--danger)' }}
                   onClick={() => handleAction(report.id, 'reject')}
                 >
